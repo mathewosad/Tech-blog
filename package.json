@@ -1,22 +1,22 @@
 {
-  "name": "bfts",
+  "name": "matts blog",
   "version": "1.0.0",
-  "description": "B.F.T.S - Blog For Tech Stuff",
+  "description": "Mathews AI blog",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bickolus/bfts.git"
+    "url": "git+https://github.com/mathewosad/Tech-blog"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Bickolus/bfts/issues"
+    "url": "https://github.com/mathewosad/Tech-blog/issues"
   },
-  "homepage": "https://github.com/Bickolus/bfts#readme",
+  "homepage": "https://github.com/mathewosad/Tech-blog/blob/main/README.md",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "connect-session-sequelize": "^7.1.2",
