@@ -50,7 +50,7 @@ node server.js
 
 <br>
 
-The URL of the functional, deployed application.( )
+The URL of the functional, deployed application.(http://localhost:3001/ )
 
 The URL of the GitHub repository. (https://github.com/mathewosad/Tech-blog)
 ### Let's Connect!
