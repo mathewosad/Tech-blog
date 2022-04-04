@@ -1,62 +1,134 @@
 const router = require("express").Router();
-const { Post, Comment, User } = require("../models/");
+const { User, Post, Comment } = require("../models");
+const withAuth = require("../utils/auth");
 
-// get all posts for homepage
-router.get("/", (req, res) => {
-    Post.findAll({
-        include: [User],
-    })
-        .then((dbPostData) => {
-            const posts = dbPostData.map((post) => post.get({ plain: true }));
+// GET /api/users
+router.get("/", async (req, res) => {
+  try {
+    // Get all posts and JOIN with users
+    const postData = await Post.findAll({
+      attributes: ["id", "post_title", "post_body", "date_created"],
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
+    });
 
-            res.render("all-posts", { posts });
-        })
-        .catch((err) => {
-            res.status(500).json(err);
-        });
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    // this is the data we want to send back
+    res.render("homepage", {
+      posts,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// get single post
-router.get("/post/:id", (req, res) => {
-    Post.findByPk(req.params.id, {
-        include: [
-            User,
-            {
-                model: Comment,
-                include: [User],
-            },
-        ],
-    })
-        .then((dbPostData) => {
-            if (dbPostData) {
-                const post = dbPostData.get({ plain: true });
+// this is the route for the login page
+router.get("/post/:id", async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      attributes: ["id", "post_title", "post_body", "date_created"],
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+        {
+          model: Comment,
+          attributes: [
+            "id",
+            "comment_body",
+            "post_id",
+            "user_id",
+            "date_created",
+          ],
+          include: {
+            model: User,
+            attributes: ["name"],
+          },
+        },
+      ],
+    });
 
-                res.render("single-post", { post });
-            } else {
-                res.status(404).end();
-            }
-        })
-        .catch((err) => {
-            res.status(500).json(err);
-        });
+    const post = postData.get({ plain: true });
+
+    res.render("single-post", { post, logged_in: req.session.logged_in });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
+// this is the route for dashboard
+router.get("/dashboard", withAuth, async (req, res) => {
+  try {
+    // this finds all posts and joins with users
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Post }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render("dashboard", {
+      ...user,
+      logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// this is the route for the create post page and the post route for the create post page and edit 
+router.get("/dashboard/edit/:id", withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+        {
+          model: Comment,
+          attributes: [
+            "id",
+            "comment_body",
+            "post_id",
+            "user_id",
+            "date_created",
+          ],
+          include: {
+            model: User,
+            attributes: ["name"],
+          },
+        },
+      ],
+    });
+
+    const post = postData.get({ plain: true });
+
+    res.render("edit-post", {
+      post,
+      logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//this lets you loggin in 
 router.get("/login", (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect("/");
-        return;
-    }
+  // this is the data we want to send back if the user is logged in and already has a session
+  if (req.session.logged_in) {
+    res.redirect("/dashboard");
+    return;
+  }
 
-    res.render("login");
-});
-
-router.get("/signup", (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect("/");
-        return;
-    }
-
-    res.render("signup");
+  res.render("login");
 });
 
 module.exports = router;

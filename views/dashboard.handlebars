@@ -1,0 +1,52 @@
+<!-- If the user has any posts made (determined by calling posts.length), then display list of user's posts -->
+{{#if posts.length}}
+<section>
+    <h2>Hello Mr {{name}}, We present to you your special posts:</h2><br>
+
+    {{#each posts as |post|}}
+    <div class="card">
+        <div class="card-header">
+            <h3><a class="card-header-text" href="/post/{{this.id}}">{{this.post_title}}</a></h3>
+            <h4><a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post></a></h4>
+        </div>
+    </div>
+    {{/each}}
+
+</section>
+{{/if}}
+
+<h2>Add new post:</h2><br>
+<!-- Section containing form to create a new blog post -->
+<section>
+
+    <div class="card">
+        <h2 class="card-header">Add New Post</h2>
+        <div class="card-body">
+
+            <form class="new-post-form">
+
+                <div>
+                    <label for="post-title">
+                        <h3 class="new-post">Add Title:<h3>
+                    </label>
+                    <input type="text" id="post-title" name="post-title" />
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="post-body">
+                        <h3 class="new-post">Add Body:</h3>
+                    </label>
+                    <textarea id="post-body" name="post-body"></textarea>
+                </div>
+
+                <button type="submit" class="btn">Submit post</button>
+            </form>
+
+        </div>
+    </div>
+
+</section>
+
+<script src="/js/new-post.js"></script>

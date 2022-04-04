@@ -1,20 +1,35 @@
-<div class="post card">
-    <div class="card-header">
-        <h2>Edit Post</h2>
-    </div>
-    <form id="edit-post-form" class="card-body">
-        <input type="hidden" name="post-id" value="{{post.id}}" />
+<!-- This template is used to edit post mostly"-->
+<div>
+    <a id="back-button" href="/dashboard">&larr; Go to Dashboard</a>
 
-        <label class="form-label" for="post-title">Title</label>
-        <input type="text" name="post-title" value="{{post.title}}" class="form-input" />
+    <h2>Edit Post</h2>
 
-        <label class="form-label" for="post-body">Content</label>
-        <textarea name="post-body" class="form-input">{{post.body}}</textarea>
+    <form class="edit-post-form" data-id="{{post.id}}">
 
-        <button type="submit" class="btn">Update</button>
+        <div class="card">
+            <div class="card-body">
+                Title:<br><input name="post-title" type="text" value="{{post.post_title}}" id="post-title" /><br>
+                Body:<textarea name="post-body" class="edit-content">{{post.post_body}}</textarea>
+            </div>
 
-        <button type="button" id="delete-btn" class="btn">Delete</button>
+            <button type="submit" class="btn" data-id="{{post.id}}">Done editing post</button>
+            <button type="button" class="btn" id="delete-post-btn" data-id="{{post.id}}">Delete this post ASAP</button>
+        </div>
+
     </form>
-</div>
 
-<script src="/javascript/edit.js"></script>
+</div>
+  <footer>
+    <div class="footer">
+      <p><a href="https://www.linkedin.com/in/mathew-osadolor-848b33177"><i class="fa-brands fa-linkedin"></i>
+          <a href="https://github.com/mathewosad"><i class="fa-brands fa-github-square"></i>
+            <a href="mailto:you@email.com"><i class="fa-solid fa-envelope-open-text"></i>
+            </a>
+            <p>Copyright &copy; 2022 | Mathew Osad</p>
+      </p>
+    </div>
+
+  </footer>
+
+<script src="/js/edit-post.js"></script>
+<script src="/js/delete-post.js"></script>

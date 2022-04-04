@@ -1,19 +1,77 @@
-<div class="card">
-    <div class="card-header">
-        <h2>Login</h2>
-    </div>
-    <form id="login-form" class="card-body">
-        <div>
-            <label for="username-input-login">Username</label>
-            <input type="text" id="username-input-login" />
+
+<div class="card" id="forms">
+
+    <form class="login-form">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+            <div>
+                <label for="email-login">Email:</label><br>
+                <input type="text" id="email-login" />
+            </div>
+
+            <div>
+                <label for="password-login">Password:</label><br>
+                <input type="password" id="password-login" />
+            </div>
+
+            <br>
+
+
+            <div>
+                <button type="submit" class="btn">Login</button>
+            </div>
+
         </div>
-        <div>
-            <label for="password-input-login" class="form-label">Password</label>
-            <input type="password" id="password-input-login" />
-        </div>
-        <button type="submit" id="login-btn" class="btn">Login</button>
-        <a type="button" href="/signup">Sign up</a>
     </form>
+
 </div>
 
-<script src="/javascript/login.js"></script>
+<h2 class="center">Please sign up if you do not have an account :)</h2>
+
+<!-- Form for signing up -->
+<div class="card" id="forms">
+
+    <form class="signup-form">
+        <div class="card-header"></div>
+        <div class="card-body">
+
+            <div>
+                <label for="username-signup">Username:</label><br>
+                <input type="text" id="username-signup" />
+            </div>
+
+            <div>
+                <label for="email-signup">Email:</label><br>
+                <input type="text" id="email-signup" />
+            </div>
+
+            <div>
+                <label for="password-signup">Password (Please enter minimum 8 characters):</label><br>
+                <input type="password" id="password-signup" />
+            </div>
+
+            <br>
+
+            <div>
+                <button type="submit" class="btn">Complete Account creation</button>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+  <footer>
+    <div class="footer">
+      <p><a href="https://www.linkedin.com/in/mathew-osadolor-848b33177"><i class="fa-brands fa-linkedin"></i>
+          <a href="https://github.com/mathewosad"><i class="fa-brands fa-github-square"></i>
+            <a href="mailto:you@email.com"><i class="fa-solid fa-envelope-open-text"></i>
+            </a>
+            <p>Copyright &copy; 2022 | Mathew Osad</p>
+      </p>
+    </div>
+
+  </footer>
+
+<script src="/js/login.js"></script>

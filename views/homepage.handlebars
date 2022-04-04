@@ -1,22 +1,12 @@
 
-{{> post-details post }}
-{{> comment post.comments}}
-
-
-{{#if logged_in}}
-<div class="card">
-	<form class="comment-form">
-		<h3 class="card-header">New comment:</h3>
-		<div class="card-body">
-			<div>
-				<textarea name="comment-body"></textarea>
-			</div>
-
-			<div>
-				<button type="submit" class="btn">Add new comment</button>
-			</div>
-		</div>
-	</form>
+<div class="list-group">
+    <div class="post-list">
+        {{#each posts as |post|}}
+        <li>
+            {{> post-details post }}
+        </li>
+        {{/each}}
+    </div>
 </div>
 
   <footer>
@@ -30,6 +20,3 @@
     </div>
 
   </footer>
-
-<script src="/js/comment.js"></script>
-{{/if}}

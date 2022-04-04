@@ -2,33 +2,60 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matt's Blog</title>
-   <link href="https://fonts.googleapis.com/css2?family=Amita:wght@700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css2?family=Hubballi&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>How you feel about AI</title>
 </head>
 
-<body class="flex-column min-100-vh">
-    <header class="hero">
-        <h1 class="app-title"><a href="/">Matt's Blog</a></h1>
-        <nav class="navbar">
-        <ul>
-            <li class="li-inline nav-item"><a href="/dashboard">Dashboard</a></li>
-            <li class="li-inline nav-item"><a href="/login">Login</a></li>
-            <li class="li-inline nav-item"><a href="#" id="logout-link">Logout</a></li>
-        </ul>
-    </nav>
-    </header>
-    
-    <main class="col-auto">
-        {{{body}}}
-    </main>
+<body>
 
-    <footer class="flex-row justify-center">
-        &copy;<script>document.write(new Date().getFullYear());</script> Mathew osad
-    </footer>
+   
+    <div class="wrapper">
+
+        <header class="hero">
+            <nav>
+                <a href="/">Home</a>
+                {{#if logged_in}}
+                <a href="/dashboard">Dashboard</a>
+                <button id="logout" class="btn-no-style">Logout</button>
+                {{else}}
+                <a href="/login">Login / Sign Up</a>
+                {{/if}}
+            </nav>
+            <h1 class="app-title">Post on how u feel about AI</h1>
+        </header>
+
+        <main>
+            <div class="col-12">
+
+                {{{ body }}}
+
+            </div>
+        </main>
+
+    </div>
+
+      <footer>
+    <div class="footer">
+      <p><a href="https://www.linkedin.com/in/mathew-osadolor-848b33177"><i class="fa-brands fa-linkedin"></i>
+          <a href="https://github.com/mathewosad"><i class="fa-brands fa-github-square"></i>
+            <a href="mailto:you@email.com"><i class="fa-solid fa-envelope-open-text"></i>
+            </a>
+            <p>Copyright &copy; 2022 | Mathew Osad</p>
+      </p>
+    </div>
+
+  </footer>
+
+
+    {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
+
 </body>
 
 </html>
-<script src="/javascript/logout.js"></script>
